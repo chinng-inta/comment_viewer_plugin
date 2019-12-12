@@ -1,0 +1,13 @@
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\bin\Release\ankoPlugin_forVCas.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\bin\Release\ankoPlugin_forVCas.pdb
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\bin\Release\ankoPlugin2.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\bin\Release\LibAnko.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\bin\Release\System.Data.SQLite.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\bin\Release\ankoPlugin2.xml
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\bin\Release\LibAnko.xml
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\bin\Release\System.Data.SQLite.xml
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\obj\Release\ankoPlugin_forVCas.csprojResolveAssemblyReference.cache
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\obj\Release\ankoPlugin_forVCas.Form1.resources
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\obj\Release\ankoPlugin_forVCas.csproj.GenerateResource.Cache
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\obj\Release\ankoPlugin_forVCas.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\ankoPlugin_forVCas\ankoPlugin_forVCas\obj\Release\ankoPlugin_forVCas.pdb

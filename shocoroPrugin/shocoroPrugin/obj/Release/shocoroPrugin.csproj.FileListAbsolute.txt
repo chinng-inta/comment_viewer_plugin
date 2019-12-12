@@ -1,0 +1,14 @@
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\bin\Release\shocoroPrugin.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\bin\Release\shocoroPrugin.pdb
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\bin\Release\is\shocoroPrugin.resources.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\bin\Release\ankoPlugin2.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\bin\Release\LibAnko.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\bin\Release\System.Data.SQLite.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\bin\Release\LibAnko.xml
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\bin\Release\System.Data.SQLite.xml
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\obj\Release\shocoroPrugin.Form1.resources
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\obj\Release\shocoroPrugin.Form1.is.resources
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\obj\Release\shocoroPrugin.csproj.GenerateResource.Cache
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\obj\Release\is\shocoroPrugin.resources.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\obj\Release\shocoroPrugin.dll
+C:\Users\ti\Documents\Visual Studio 2017\Projects\shocoroPrugin\shocoroPrugin\obj\Release\shocoroPrugin.pdb

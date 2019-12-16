@@ -102,15 +102,11 @@ namespace shocoroPrugin
             string countLog = "giftcount";
 
             
-            if (message.Contains(giftLog) && message.Contains(countLog))
+            if ( (message.Contains(giftLog) && message.Contains(countLog)) || form.getCheckBox() == true )
             {
                 form.userNameChange(userName);
                 dynamic obj = DynamicJson.Parse(@"" + message);
-                /*
-                int num = message.IndexOf(giftLog);
-                num += giftLog.Length + 3;
-                string gitfName = message.Substring(num, 5);
-                */
+
                 string gitfName = obj.gift_name;
                 form.giftNameChange(gitfName);
 
@@ -121,7 +117,12 @@ namespace shocoroPrugin
                 int.TryParse(obj.giftcount.ToString(), out gitfCnt);
 
                 form.giftCntChange(obj.giftcount.ToString());
-                form.addGiftList(gitfName, gitfCnt);
+                string msg = userName + "から" + gitfName +"を"+ gitfCnt + "個";
+                form.addOpeCommentArray(msg);
+//                form.addGiftList(gitfName, gitfCnt);
+            }else
+            {
+                form.addCommentArray(userName, message);
             }
         }
         /// <summary>
@@ -131,10 +132,7 @@ namespace shocoroPrugin
         /// <param name="e"></param>
         void _host_ReceiveChat(object sender, ankoPlugin2.ReceiveChatEventArgs e)
         {
-             //giftChecker(e.Chat.Name, e.Chat.Message);
-                        form.userNameChange(e.Chat.Name);
-                        form.giftNameChange(e.Chat.userinfo.userid);
-                        form.giftCntChange(e.Chat.userinfo.Coid);
+                giftChecker(e.Chat.Name, e.Chat.Message);
         }
         /// <summary>
         /// 放送に接続したら呼ばれる

@@ -17,6 +17,8 @@ namespace shocoroPrugin
     {
         List<Gifts> giftList;
         bool started;
+        string[] commentList = new string[9] { @"Comment1", @"Comment2", @"Comment3", @"Comment4", @"Comment5", @"Comment6", @"Comment7", @"Comment8", @"Comment9" };
+        string[] opecommentList = new string[9] { @"opeComment1", @"opeComment2", @"opeComment3", @"opeComment4", @"opeComment5", @"opeComment6", @"opeComment7", @"opeComment8", @"opeComment9" };
         Thread t;
 
         public Form1()
@@ -64,6 +66,14 @@ namespace shocoroPrugin
 
             }
             this.textBox1.Text = this.参照.FileName;
+        }
+        public bool getCheckBox()
+        {
+            if (this.checkBox1.Checked == true)
+            {
+                return true;
+            }
+            return false;
         }
         void startButton_Click(object sender, EventArgs e)
         {
@@ -114,42 +124,45 @@ namespace shocoroPrugin
             }
 
         }
+        public void addCommentArray(string user, string message)
+        {
+            for (int i = 0; i < commentList.Length - 1; i++)
+            {
+                commentList[i] = commentList[i + 1];
+            }
+            commentList[commentList.Length - 1] = @"{" + "live=" + "\"showroom\"" + "," + "date=" + ToUnixTime(GetCurrentDateTime()) + "," + "user=\"" + user + "\"," + "msg=\"" + message + "\"}";
+//            mseesageLabel.Text = commentList[commentList.Length - 1];
+        }
+        protected virtual DateTime GetCurrentDateTime()
+        {
+            return DateTime.Now;
+        }
+
+        public static long ToUnixTime(DateTime dateTime)
+        {
+            // 時刻をUTCに変換
+            dateTime = dateTime.ToUniversalTime();
+
+            // unix epochからの経過秒数を求める
+            return (long)dateTime.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+        }
+        public void addOpeCommentArray(string message)
+        {
+            for (int i = 0; i < opecommentList.Length - 1; i++)
+            {
+                opecommentList[i] = opecommentList[i + 1];
+            }
+            string msg = message.Replace("\"", "\\\"");
+            string[] str = msg.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            opecommentList[opecommentList.Length - 1] = @"{date = " + ToUnixTime(GetCurrentDateTime()) + ", msg = \"" + msg + "\"}";
+        }
         public void writeLuaFile()
         {
-            int SeedA = 0;
-            int SeedB = 0;
-            int SeedC = 0;
-            int SeedD = 0;
-            int SeedE = 0;
-            int Heart = 0;
+            string message;
 
-            foreach (Gifts gift in giftList)
-            {
-                switch (gift.Name)
-                {
-                    case "seedA":
-                        SeedA += gift.Count;
-                        break;
-                    case "seedB":
-                        SeedB += gift.Count;
-                        break;
-                    case "seedC":
-                        SeedC += gift.Count;
-                        break;
-                    case "seedD":
-                        SeedD += gift.Count;
-                        break;
-                    case "seedE":
-                        SeedE += gift.Count;
-                        break;
-                    case "3":
-                        Heart += gift.Count;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            giftList.Clear();
+            if (started != true)
+                return;
 
             try
             {
@@ -158,12 +171,23 @@ namespace shocoroPrugin
                 string rStr = sr.ReadToEnd();
                 sr.Close();
 
-                rStr = Regex.Replace(rStr, @"SeedA = [0-9]+", "SeedA = " + SeedA.ToString());
-                rStr = Regex.Replace(rStr, @"SeedB = [0-9]+", "SeedB = " + SeedB.ToString());
-                rStr = Regex.Replace(rStr, @"SeedC = [0-9]+", "SeedC = " + SeedC.ToString());
-                rStr = Regex.Replace(rStr, @"SeedD = [0-9]+", "SeedD = " + SeedD.ToString());
-                rStr = Regex.Replace(rStr, @"SeedE = [0-9]+", "SeedE = " + SeedE.ToString());
-                rStr = Regex.Replace(rStr, @"Heart = [0-9]+", "Heart = " + Heart.ToString());
+                for (int i = 0; i < commentList.Length; i++)
+                {
+                    string msg = commentList[i];
+                    msg = Regex.Replace(msg, "Comment[0-9]", "\"" + msg + "\"");
+
+                    rStr = Regex.Replace(rStr, @"commentList\[" + (i + 1).ToString() + @"\] = .+", @"commentList[" + (i + 1).ToString() + "] = " + msg + "");
+                }
+
+                for (int i = 0; i < opecommentList.Length; i++)
+                {
+                    message = opecommentList[i];
+
+                    message = Regex.Replace(message, "opeComment[0-9]", "\"" + message + "\"");
+
+
+                    rStr = Regex.Replace(rStr, @"opeCommentList\[" + (i + 1).ToString() + @"\] = .+", @"opeCommentList[" + (i + 1).ToString() + "] = " + message + "");
+                }
 
                 StreamWriter sw = new StreamWriter(
                     luaFile,
@@ -177,8 +201,8 @@ namespace shocoroPrugin
             catch (DirectoryNotFoundException sr)
             {
                 // Let the user know that the directory did not exist.
-                errorLabel.Text = sr.Message;
             }
+
         }
     }
 }

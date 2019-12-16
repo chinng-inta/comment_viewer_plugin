@@ -69,4 +69,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>md "$(ProjectDir)..\..\release\"
+copy "$(TargetPath)" "$(ProjectDir)..\..\release\" /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

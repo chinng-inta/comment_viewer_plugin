@@ -39,6 +39,7 @@
             this.参照 = new System.Windows.Forms.OpenFileDialog();
             this.errorLabel = new System.Windows.Forms.Label();
             this.startButton = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // userName
@@ -92,10 +93,17 @@
             this.startButton.Name = "startButton";
             this.startButton.UseVisualStyleBackColor = true;
             // 
+            // checkBox1
+            // 
+            resources.ApplyResources(this.checkBox1, "checkBox1");
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.button1);
@@ -124,5 +132,6 @@
         private System.Windows.Forms.OpenFileDialog 参照;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

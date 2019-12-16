@@ -36,7 +36,7 @@ MCVPluginforVCas\MCV_VCasPlugin.dllをフォルダMultiCommentViewerのpluginフ
 メニューのプラグインからankoPlugin_forVCasを選択します。
 別ウィンドウが起動します。
 
-[ankoPlugin_forVCas]()
+![ankoPlugin_forVCas](https://github.com/chinng-inta/comment_viewer_plugin/blob/master/resource/image/ankoPlugin_forVCas.jpg)
 1. 参照をクリックし、コメントビューア連携コメビュ(あんこちゃん送信用)のmain.lua(※1)を選択。
 2. 開始を押すことで、VCIアイテムへのコメント送信が開始されます。
 3. 運営コメントのみVCIに送信にチェックを入れることで、ニコニ広告やニコ生クルーズのコメントのみVCIに送信することも可能です。
@@ -48,7 +48,7 @@ MCVPluginforVCas\MCV_VCasPlugin.dllをフォルダMultiCommentViewerのpluginフ
 メニューのプラグインからShocoroToluaを選択します。
 別ウィンドウが起動します。
 
-[shocoroPrugin]()
+![shocoroPrugin](https://github.com/chinng-inta/comment_viewer_plugin/blob/master/resource/image/shocoroPrugin.jpg)
 1. 参照をクリックし、コメントビューア連携コメビュ(しょころ送信用)のmain.lua(※2)を選択。
 2. 開始を押すことで、VCIアイテムへのコメント送信が開始されます。
 3. ギフトのみVCIに送信にチェックを入れることで、ギフトのコメントのみVCIに送信することも可能です。
@@ -61,7 +61,7 @@ MCVPluginforVCas\MCV_VCasPlugin.dllをフォルダMultiCommentViewerのpluginフ
 メニューのプラグインからVCasを選択します。
 別ウィンドウが起動します。
 
-[MCV_VCasPlugin]()
+![MCV_VCasPlugin](https://github.com/chinng-inta/comment_viewer_plugin/blob/master/resource/image/MCV_VCasPlugin.jpg)
 1. 参照をクリックし、コメントビューア連携コメビュ(MCV送信用)のmain.lua(※3)を選択。
 2. 開始を押すことで、VCIアイテムへのコメント送信が開始されます。
 

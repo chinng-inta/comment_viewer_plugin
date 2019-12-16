@@ -149,8 +149,13 @@ namespace ankoPlugin_forVCas
                     msg = str[3] + "さんからギフト" + str[6];
                     msg = msg.Replace("\\\"", "");
                     break;
+                case "/cruise":
+                    msg = str[1];
+                    msg = msg.Replace("\\\"", "");
+                    break;
                 case "/quote":
                     msg = str[1];
+                    msg = msg.Replace("\\\"", "");
                     break;
                 case "/uadpoint":
                     msg = "広告が設定されました累計ポイントが" + str[2] + "になりました";
@@ -160,8 +165,12 @@ namespace ankoPlugin_forVCas
                     msg = "disconnect";
                     msg = msg.Replace("\\\"", "");
                     break;
+                case "/spi":
+                    msg = str[1];
+                    msg = msg.Replace("\\\"", "");
+                    break;
                 default:
-                    msg = msg.Replace("\\\"", "\"");
+                    msg = msg.Replace("\\\"", "");
                     break;
             }
             opecommentList[opecommentList.Length - 1] = @"{date = "+ ToUnixTime(GetCurrentDateTime()) + ",msg = \"" + msg + "\"}";

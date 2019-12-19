@@ -73,8 +73,11 @@ MCVPluginforVCas\MCV_VCasPlugin.dllをフォルダMultiCommentViewerのpluginフ
 twitter : https://twitter.com/chinng_inta
 
 # 更新履歴
-2019/12/16 初版公開
 
+| version | date       | detail  |
+| ------- | ---------- | -------- |
+| v1.0.0  | 2019/12/16 | 初版公開 |
+| v1.0.1  | 2019/12/20 | "\"や"/"等のluaのjsonで処理できない文字を全角に変換する対応<br/>"$"がファイル書き出し時に正しく処理できない問題の修正 |
 
 ## License
 MIT

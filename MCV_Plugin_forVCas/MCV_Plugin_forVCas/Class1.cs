@@ -139,9 +139,13 @@ namespace MCV_Plugin_forVCas_Plugin
             {
                 name = comment.NameItems.ToText();
             }
+            name = name.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／");
+
+            string _comment = comment.CommentItems.ToText();
+            _comment = _comment.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／").Replace("\"", "");
             var data = new Data
             {
-                Comment = comment.CommentItems.ToText(),
+                Comment = _comment,
                 Nickname = name,
                 SiteName = siteName,
             };
@@ -191,42 +195,8 @@ namespace MCV_Plugin_forVCas_Plugin
                 {
                     message = commentList[i];
 
-                    //                    string msg = message.Replace("\"", "\\\"");
                     string msg= message;
 
-                    /*
-                                        string[] str = msg.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                                        switch (str[0])
-                                        {
-
-                                            case "/nicoad":
-                                                str[1] = str[1].Replace("\\", "");
-                                                dynamic obj = DynamicJson.Parse(@"" + str[1]);
-                                                if (obj.IsDefined("message") == true)
-                                                {
-                                                    msg = obj.message;
-                                                }
-                                                else
-                                                {
-                                                    msg = str[1];
-                                                }
-                                                break;
-                                            case "/info":
-                                                msg = str[2];
-                                                break;
-                                            case "/gift":
-                                                msg = str[3] + "さんからギフト" + str[6];
-                                                msg = msg.Replace("\\\"", "\"");
-                                                break;
-                                            case "/quote":
-                                                msg = str[1];
-                                                break;
-                                            default:
-                                                msg = msg.Replace("\\\"", "\"");
-                                                break;
-                                        }
-                    */
                     if (Regex.IsMatch(msg, "Comment[0-9]") == true)
                     {
                         msg = Regex.Replace(msg, "Comment[0-9]", "\"" + msg + "\"");
@@ -261,31 +231,6 @@ namespace MCV_Plugin_forVCas_Plugin
             if (_commentCollection.Count == 0)
                 return;
 
-/*
-            if (_commentCollection.Count > 9)
-            {
-                _writeTimer?.Stop();
-
-                _writeTimer = new System.Timers.Timer
-                {
-                    Interval = 500
-                };
-                _writeTimer.Elapsed += _writeTimer_Elapsed;
-                _writeTimer.Start();
-            } else {
-                if ( _writeTimer.Interval == 500 )
-                {
-                    _writeTimer?.Stop();
-
-                    _writeTimer = new System.Timers.Timer
-                    {
-                        Interval = 1000
-                    };
-                    _writeTimer.Elapsed += _writeTimer_Elapsed;
-                    _writeTimer.Start();
-                }
-            }
-*/
             var arr = _commentCollection.ToArray();
             List<string> _commentList = new List<string>();
 
@@ -294,16 +239,10 @@ namespace MCV_Plugin_forVCas_Plugin
             foreach (var data in arr)
             {
                 string msg = "";
-//                var item = new XElement("comment", data.Comment);
-//                item.SetAttributeValue("no", "0");
-//                item.SetAttributeValue("time", ToUnixTime(GetCurrentDateTime()));
-//                item.SetAttributeValue("owner", 0);
-//                item.SetAttributeValue("service", data.SiteName);
+
                 //2019/08/25 コメジェネの仕様で、handleタグが無いと"0コメ"に置換されてしまう。だから空欄でも良いからhandleタグは必須。
                 var handle = string.IsNullOrEmpty(data.Nickname) ? "" : data.Nickname;
-//                item.SetAttributeValue("handle", handle);
 
-//                msg = @"" + data.SiteName + "\t" + ToUnixTime(GetCurrentDateTime()) + "\t" + handle + "\t" + data.Comment;
                 msg = @"{" + "live=\"" + data.SiteName + "\"," + "date=" + ToUnixTime(GetCurrentDateTime()) + "," + "user=\"" + handle + "\"," + "msg=\"" + data.Comment + "\"}";
                 _commentList.Add(msg);
                 _commentCollection.RemoveAt(0);
@@ -336,10 +275,6 @@ namespace MCV_Plugin_forVCas_Plugin
                 Debug.WriteLine(ex.Message);
                 return;
             }
-//            for(int i = 0; i< count; i++)
-//            {
-//                _commentCollection.RemoveAt(0);
-//            }
 
             return;
         }

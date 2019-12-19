@@ -101,6 +101,8 @@ namespace ankoPlugin_forVCas
             {
                 commentList[i] = commentList[i + 1];
             }
+            user = user.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／");
+            message = message.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／").Replace("\"", ""); ;
             commentList[commentList.Length - 1] = @"{"+ "live=" + "\"nicolive\"" + "," + "date=" + ToUnixTime(GetCurrentDateTime()) + "," + "user=\"" + user + "\"," + "msg=\"" + message + "\"}";
             mseesageLabel.Text = commentList[commentList.Length - 1];
         }
@@ -146,7 +148,8 @@ namespace ankoPlugin_forVCas
                     msg = str[2];
                     break;
                 case "/gift":
-                    msg = str[3] + "さんからギフト" + str[6];
+                    string user = str[3].Replace("/", "／");
+                    msg = user + "さんからギフト" + str[6];
                     msg = msg.Replace("\\\"", "");
                     break;
                 case "/cruise":
@@ -169,8 +172,13 @@ namespace ankoPlugin_forVCas
                     msg = str[1];
                     msg = msg.Replace("\\\"", "");
                     break;
-                default:
+                case "/perm":
+                    msg = msg.Replace("\n", "").Replace("$", "＄").Replace("/", "／");
                     msg = msg.Replace("\\\"", "");
+                    break;
+                default:
+                    msg = msg.Replace("\n", "").Replace("$", "＄").Replace("/", "／");
+                    msg = msg.Replace("\\\"", "").Replace("\\", "￥");
                     break;
             }
             opecommentList[opecommentList.Length - 1] = @"{date = "+ ToUnixTime(GetCurrentDateTime()) + ",msg = \"" + msg + "\"}";

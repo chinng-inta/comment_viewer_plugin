@@ -105,6 +105,7 @@ namespace shocoroPrugin
             if ( (message.Contains(giftLog) && message.Contains(countLog)) || form.getCheckBox() == true )
             {
                 form.userNameChange(userName);
+                userName = userName.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／");
                 dynamic obj = DynamicJson.Parse(@"" + message);
 
                 string gitfName = obj.gift_name;

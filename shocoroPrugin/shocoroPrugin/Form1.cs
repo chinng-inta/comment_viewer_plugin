@@ -130,8 +130,9 @@ namespace shocoroPrugin
             {
                 commentList[i] = commentList[i + 1];
             }
+            user = user.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／");
+            message = message.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／").Replace("\"", "");
             commentList[commentList.Length - 1] = @"{" + "live=" + "\"showroom\"" + "," + "date=" + ToUnixTime(GetCurrentDateTime()) + "," + "user=\"" + user + "\"," + "msg=\"" + message + "\"}";
-//            mseesageLabel.Text = commentList[commentList.Length - 1];
         }
         protected virtual DateTime GetCurrentDateTime()
         {

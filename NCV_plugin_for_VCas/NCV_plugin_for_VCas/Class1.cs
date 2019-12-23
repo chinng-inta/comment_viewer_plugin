@@ -134,7 +134,7 @@ namespace NCV_plugin_for_VCas
             NicoLibrary.NicoLiveData.LiveCommentData commentData = e.CommentDataList[count - 1];
             string comment = commentData.Comment;
 
-            if ( ( (commentData.PremiumBits & NicoLibrary.NicoLiveData.PremiumFlags.ServerComment ) == NicoLibrary.NicoLiveData.PremiumFlags.ServerComment ) &&
+            if ( ( (commentData.PremiumBits & NicoLibrary.NicoLiveData.PremiumFlags.ServerComment ) == NicoLibrary.NicoLiveData.PremiumFlags.ServerComment ) ||
                  form.getCheckBox() == true )
             {
                 form.addOpeCommentArray(comment);

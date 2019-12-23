@@ -110,13 +110,13 @@ namespace NCV_plugin_for_VCas
         //放送接続時イベントハンドラ
         void _host_BroadcastConnected(object sender, EventArgs e)
         {
-             MessageBox.Show("放送に接続しました", Name);//動作確認用MessageBox
+//             MessageBox.Show("放送に接続しました", Name);//動作確認用MessageBox
         }
 
         //放送切断時イベントハンドラ
         void _host_BroadcastDisConnected(object sender, EventArgs e)
         {
-             MessageBox.Show("放送から切断しました", Name);//動作確認用MessageBox
+//             MessageBox.Show("放送から切断しました", Name);//動作確認用MessageBox
         }
 
         //コメント受信時イベントハンドラ
@@ -134,7 +134,8 @@ namespace NCV_plugin_for_VCas
             NicoLibrary.NicoLiveData.LiveCommentData commentData = e.CommentDataList[count - 1];
             string comment = commentData.Comment;
 
-            if ( (commentData.PremiumBits & NicoLibrary.NicoLiveData.PremiumFlags.ServerComment ) == NicoLibrary.NicoLiveData.PremiumFlags.ServerComment)
+            if ( ( (commentData.PremiumBits & NicoLibrary.NicoLiveData.PremiumFlags.ServerComment ) == NicoLibrary.NicoLiveData.PremiumFlags.ServerComment ) &&
+                 form.getCheckBox() == true )
             {
                 form.addOpeCommentArray(comment);
             } else

@@ -5,6 +5,7 @@
 * やります！アンコちゃん (http://yarimasu.ankochan.net/)
 * Showroom Comment Log viewer しょころ(仮） (http://ameblo.jp/nyon-neco)
 * MultiCommentViewer (https://github.com/CommentViewerCollection/MultiCommentViewer/) 
+* NicoNamaCommentViewer (https://www.posite-c.com/application/ncv/)
 
 本プラグインを導入し、VRライブ・コミュニケーションサービス「バーチャルキャスト」で使用可能な以下のVCIアイテムと連携することで、
 VCIアイテムの機能でサポートされていない運営コメント、YouTube, Twitchのコメントをバーチャルキャスト内に表示することが出来ます。
@@ -17,6 +18,8 @@ VCIアイテムの機能でサポートされていない運営コメント、Yo
 
 [コメントビューア連携コメビュ(MCV送信用)](https://seed.online/items/c1f5bd1852c9a0182c59c8f1a14d7492cab922928fb18e7ebd501af47ac561b8)
 
+[コメントビューア連携コメビュ(NCV送信用)](https://seed.online/items/af6f9f11ab98bb01bddb6b47dfd39c18293d8ec3c7a5b770c1292ff210824588)
+
 # 導入方法
 ## やります！アンコちゃん
 ankoPlugin_forVCas.dllをやります！アンコちゃんのpluginフォルダにコピーします。
@@ -25,7 +28,10 @@ ankoPlugin_forVCas.dllをやります！アンコちゃんのpluginフォルダ�
 shocoroPrugin.dllをShowroom Comment Log viewer しょころ(仮）のpluginフォルダにコピーします。
 
 ## MultiCommentViewer
-MCVPluginforVCas\MCV_VCasPlugin.dllをフォルダMultiCommentViewerのpluginフォルダにコピーします。
+MCVPluginforVCas\MCV_VCasPlugin.dllをフォルダごと、MultiCommentViewerのpluginフォルダにコピーします。
+
+## NicoNamaCommentViewer
+NCV_plugin_for_VCas.dllをフォルダNicoNamaCommentViewerのpluginフォルダにコピーします。
 
 # 削除方法
 ファイルをフォルダから削除します
@@ -68,6 +74,17 @@ MCVPluginforVCas\MCV_VCasPlugin.dllをフォルダMultiCommentViewerのpluginフ
 ※3 デフォルトでは、"C:\Users\(ユーザ名)\AppData\LocalLow\infiniteloop Co,Ltd\VirtualCast\EmbeddedScriptWorkspace\コメントビューア連携コメビュ(MCV送信用)\main.lua"になります。
 　ファイルが存在しない場合は、同じフォルダの_main.luaをmain.luaという名前でコピーしてください。
 
+## NicoNamaCommentViewer
+メニューのプラグインからNCV_plugin_for_VCasを選択します。
+別ウィンドウが起動します。
+
+![NCV_plugin_for_VCas](https://github.com/chinng-inta/comment_viewer_plugin/blob/master/resource/image/NCV_plugin_for_VCas.jpg)
+1. 参照をクリックし、コメントビューア連携コメビュ(しょころ送信用)のmain.lua(※2)を選択。
+2. 開始を押すことで、VCIアイテムへのコメント送信が開始されます。
+3. ギフトのみVCIに送信にチェックを入れることで、ギフトのコメントのみVCIに送信することも可能です。
+
+※2 デフォルトでは、"C:\Users\(ユーザ名)\AppData\LocalLow\infiniteloop Co,Ltd\VirtualCast\EmbeddedScriptWorkspace\コメントビューア連携コメビュ(NCV送信用)\main.lua"になります。
+　ファイルが存在しない場合は、同じフォルダの_main.luaをmain.luaという名前でコピーしてください。
 
 # 連絡先
 twitter : https://twitter.com/chinng_inta
@@ -78,6 +95,7 @@ twitter : https://twitter.com/chinng_inta
 | ------- | ---------- | -------- |
 | v1.0.0  | 2019/12/16 | 初版公開 |
 | v1.0.1  | 2019/12/20 | "\"や"/"等のluaのjsonで処理できない文字を全角に変換する対応<br/>"$"がファイル書き出し時に正しく処理できない問題の修正 |
+| v1.1.0  | 2019/12/23 | NCV対応 |
 
 ## License
 MIT

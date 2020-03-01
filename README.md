@@ -20,6 +20,9 @@ VCIアイテムの機能でサポートされていない運営コメント、Yo
 
 [コメントビューア連携コメビュ(NCV送信用)](https://seed.online/items/af6f9f11ab98bb01bddb6b47dfd39c18293d8ec3c7a5b770c1292ff210824588)
 
+# ダウンロード
+[ダウンロードページ](https://github.com/chinng-inta/comment_viewer_plugin/releases)
+
 # 導入方法
 ## やります！アンコちゃん
 ankoPlugin_forVCas.dllをやります！アンコちゃんのpluginフォルダにコピーします。

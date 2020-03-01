@@ -134,15 +134,17 @@ namespace NCV_plugin_for_VCas
             NicoLibrary.NicoLiveData.LiveCommentData commentData = e.CommentDataList[count - 1];
             string comment = commentData.Comment;
 
-            if ( ( (commentData.PremiumBits & NicoLibrary.NicoLiveData.PremiumFlags.ServerComment ) == NicoLibrary.NicoLiveData.PremiumFlags.ServerComment ) ||
-                 form.getCheckBox() == true )
+            if ( ( (commentData.PremiumBits & NicoLibrary.NicoLiveData.PremiumFlags.ServerComment ) == NicoLibrary.NicoLiveData.PremiumFlags.ServerComment ) )
             {
                 form.addOpeCommentArray(comment);
             } else
             {
-                //コメント文字列を取り出す
-                string user = commentData.Name;
-                form.addCommentArray(user, comment);
+                if (form.getCheckBox() != true)
+                {
+                    //コメント文字列を取り出す
+                    string user = commentData.Name;
+                    form.addCommentArray(user, comment);
+                }
             }
 
         }

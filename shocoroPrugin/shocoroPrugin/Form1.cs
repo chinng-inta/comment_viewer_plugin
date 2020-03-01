@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.IO;
@@ -17,6 +19,8 @@ namespace shocoroPrugin
     {
         List<Gifts> giftList;
         bool started;
+        private SynchronizedCollection<Data> _commentCollection = new SynchronizedCollection<Data>();
+        private SynchronizedCollection<Data> _opecommentCollection = new SynchronizedCollection<Data>();
         string[] commentList = new string[9] { @"Comment1", @"Comment2", @"Comment3", @"Comment4", @"Comment5", @"Comment6", @"Comment7", @"Comment8", @"Comment9" };
         string[] opecommentList = new string[9] { @"opeComment1", @"opeComment2", @"opeComment3", @"opeComment4", @"opeComment5", @"opeComment6", @"opeComment7", @"opeComment8", @"opeComment9" };
         Thread t;
@@ -79,6 +83,11 @@ namespace shocoroPrugin
         {
             if(started == false)
             {
+                if (string.IsNullOrEmpty(this.textBox1.Text) == true)
+                {
+                    MessageBox.Show("main.luaを指定してください");
+                    return;
+                }
                 this.startButton.Text = "停止";
                 started = true;
 
@@ -119,20 +128,35 @@ namespace shocoroPrugin
         {
             while(started == true)
             {
-                writeLuaFile();
+                Write();
                 await Task.Delay(1000);
             }
 
         }
+        class Data
+        {
+            public object Comment { get; internal set; }
+            public object SiteName { get; internal set; }
+            public string Nickname { get; internal set; }
+        }
         public void addCommentArray(string user, string message)
         {
-            for (int i = 0; i < commentList.Length - 1; i++)
-            {
-                commentList[i] = commentList[i + 1];
-            }
+//            for (int i = 0; i < commentList.Length - 1; i++)
+//            {
+//                commentList[i] = commentList[i + 1];
+//            }
+
             user = user.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／");
-            message = message.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／").Replace("\"", "");
-            commentList[commentList.Length - 1] = @"{" + "live=" + "\"showroom\"" + "," + "date=" + ToUnixTime(GetCurrentDateTime()) + "," + "user=\"" + user + "\"," + "msg=\"" + message + "\"}";
+            message = message.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／").Replace("\"", ""); ;
+//            commentList[commentList.Length - 1] = @"{"+ "live=" + "\"showroom\"" + "," + "date=" + ToUnixTime(GetCurrentDateTime()) + "," + "user=\"" + user + "\"," + "msg=\"" + message + "\"}";
+//            mseesageLabel.Text = commentList[commentList.Length - 1];
+            var data = new Data
+            {
+                Comment = message,
+                Nickname = user,
+                SiteName = "showroom",
+            };
+            _commentCollection.Add(data);
         }
         protected virtual DateTime GetCurrentDateTime()
         {
@@ -149,21 +173,25 @@ namespace shocoroPrugin
         }
         public void addOpeCommentArray(string message)
         {
-            for (int i = 0; i < opecommentList.Length - 1; i++)
-            {
-                opecommentList[i] = opecommentList[i + 1];
-            }
+//            for (int i = 0; i < opecommentList.Length -1; i++)
+//            {
+//                opecommentList[i] = opecommentList[i + 1];
+//            }
             string msg = message.Replace("\"", "\\\"");
             string[] str = msg.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             opecommentList[opecommentList.Length - 1] = @"{date = " + ToUnixTime(GetCurrentDateTime()) + ", msg = \"" + msg + "\"}";
+            var data = new Data
+            {
+                Comment = msg,
+                Nickname = "",
+                SiteName = "",
+            };
+            _opecommentCollection.Add(data);
         }
         public void writeLuaFile()
         {
             string message;
-
-            if (started != true)
-                return;
 
             try
             {
@@ -204,6 +232,84 @@ namespace shocoroPrugin
                 // Let the user know that the directory did not exist.
             }
 
+        }
+
+        public void Write()
+        {
+            if (started != true)
+                return;
+
+            if (_commentCollection.Count == 0 && _opecommentCollection.Count == 0)
+                return;
+
+            var arr = _commentCollection.ToArray();
+            List<string> _commentList = new List<string>();
+
+            int count = 0;
+
+            foreach (var data in arr)
+            {
+                string msg = "";
+
+                //2019/08/25 コメジェネの仕様で、handleタグが無いと"0コメ"に置換されてしまう。だから空欄でも良いからhandleタグは必須。
+                var handle = string.IsNullOrEmpty(data.Nickname) ? "" : data.Nickname;
+
+                msg = @"{" + "live=\"" + data.SiteName + "\"," + "date=" + ToUnixTime(GetCurrentDateTime()) + "," + "user=\"" + handle + "\"," + "msg=\"" + data.Comment + "\"}";
+                _commentList.Add(msg);
+                _commentCollection.RemoveAt(0);
+                count++;
+                if (count > 9)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < (9 - count); i++)
+                commentList[i] = commentList[i + count];
+            for (int i = 0; i < count; i++)
+            {
+                commentList[9 - count + i] = _commentList[i];
+            }
+
+            var arr1 = _opecommentCollection.ToArray();
+            List<string> _opecommentList = new List<string>();
+
+            count = 0;
+            foreach (var data in arr1)
+            {
+                string msg = "";
+
+                //2019/08/25 コメジェネの仕様で、handleタグが無いと"0コメ"に置換されてしまう。だから空欄でも良いからhandleタグは必須。
+                var handle = string.IsNullOrEmpty(data.Nickname) ? "" : data.Nickname;
+
+                msg = @"{" + "date=" + ToUnixTime(GetCurrentDateTime()) + ", " + "msg=\"" + data.Comment + "\"}";
+                _opecommentList.Add(msg);
+                _opecommentCollection.RemoveAt(0);
+                count++;
+                if (count > 9)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < (9 - count); i++)
+                opecommentList[i] = opecommentList[i + count];
+            for (int i = 0; i < count; i++)
+            {
+                opecommentList[9 - count + i] = _opecommentList[i];
+            }
+
+            try
+            {
+                writeLuaFile();
+            }
+            catch (IOException ex)
+            {
+                //コメントの流れが早すぎるとused in another processが来てしまう。
+                //この場合、コメントが書き込まれずに消されてしまう。
+                Debug.WriteLine(ex.Message);
+                return;
+            }
+
+            return;
         }
     }
 }

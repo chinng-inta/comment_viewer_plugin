@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.ComponentModel;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace MCV_Plugin_forVCas_Plugin.ViewModel
@@ -83,7 +84,12 @@ namespace MCV_Plugin_forVCas_Plugin.ViewModel
                 this.isStarted = false;
                 this.buttonName = "開始";
             } else
-            { 
+            {
+                if (string.IsNullOrEmpty(_options.luaFile) == true)
+                {
+                    MessageBox.Show("main.luaを指定してください");
+                    return;
+                }
                 this.isStarted = true;
                 this.buttonName = "停止";
             }
@@ -100,6 +106,9 @@ namespace MCV_Plugin_forVCas_Plugin.ViewModel
             var result = fileDialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
+                MessageBox.Show("ファイルパス：" + fileDialog.FileName +
+                                "\r\n" +
+                                "ファイル名　：" + fileDialog.SafeFileName);
                 _options.luaFile = fileDialog.FileName;
             }
         }

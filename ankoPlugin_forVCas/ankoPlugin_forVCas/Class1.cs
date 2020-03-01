@@ -115,7 +115,7 @@ namespace ankoPlugin_forVCas
                 giftChecker(e.Chat.IsCaster, e.Chat.Message);
             } else
             {
-                form.addCommentArray(e.Chat.userinfo.DisplayName, e.Chat.Message);
+                form.addCommentArray(e.Chat.userinfo.CharaName, e.Chat.Message);
             }
 
         }

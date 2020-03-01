@@ -63,11 +63,8 @@ namespace MCV_Plugin_forVCas_Plugin
             public object SiteName { get; internal set; }
             public string Nickname { get; internal set; }
         }
-        public void OnMessageReceived(IMessage message, IMessageMetadata messageMetadata)
+        public void OnMessageReceived(ISiteMessage message, IMessageMetadata messageMetadata)
         {
-            if (!(message is IMessageComment comment)) return;
-
-
             //各サイトのサービス名
             //YouTubeLive:youtubelive
             //ニコ生:nicolive
@@ -79,58 +76,8 @@ namespace MCV_Plugin_forVCas_Plugin
             //LINELIVE:linelive
             //Periscope:periscope
             //Mixer:mixer
-
-            string siteName;
-            if (message is YouTubeLiveSitePlugin.IYouTubeLiveComment)
-            {
-                siteName = "youtubelive";
-            }
-            else if (message is NicoSitePlugin.INicoComment)
-            {
-                siteName = "nicolive";
-            }
-            else if (message is TwitchSitePlugin.ITwitchComment)
-            {
-                siteName = "twitch";
-            }
-            else if (message is TwicasSitePlugin.ITwicasComment)
-            {
-                siteName = "twicas";
-            }
-            else if (message is WhowatchSitePlugin.IWhowatchComment)
-            {
-                siteName = "whowatch";
-            }
-            else if (message is OpenrecSitePlugin.IOpenrecComment)
-            {
-                siteName = "openrec";
-            }
-            else if (message is MirrativSitePlugin.IMirrativComment)
-            {
-                siteName = "mirrativ";
-            }
-            else if (message is LineLiveSitePlugin.ILineLiveComment)
-            {
-                siteName = "linelive";
-            }
-            else if (message is PeriscopeSitePlugin.IPeriscopeComment)
-            {
-                siteName = "periscope";
-            }
-            else if (message is ShowRoomSitePlugin.IShowRoomComment)
-            {
-                siteName = "showroom";
-            }
-            //else if (message is MixerSitePlugin.IMixerComment)
-            //{
-            //    siteName = "mixer";
-            //}
-            else
-            {
-                siteName = "";
-            }
-
-            string name;
+/*
+             string name;
             if (messageMetadata.User != null && !string.IsNullOrEmpty(messageMetadata.User.Nickname))
             {
                 name = messageMetadata.User.Nickname;
@@ -139,9 +86,18 @@ namespace MCV_Plugin_forVCas_Plugin
             {
                 name = comment.NameItems.ToText();
             }
-            name = name.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／");
+            
 
             string _comment = comment.CommentItems.ToText();
+*/
+            var siteName = Tools.GetSiteName(message);
+            var (name, comment) = PluginCommon.Tools.GetData(message);
+            if (HasNickname(messageMetadata.User))
+            {
+                name = messageMetadata.User.Nickname;
+            }
+            name = name.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／");
+            string _comment = comment;
             _comment = _comment.Replace("\n", "").Replace("$", "＄").Replace("\\", "￥").Replace("/", "／").Replace("\"", "");
             var data = new Data
             {
@@ -151,6 +107,12 @@ namespace MCV_Plugin_forVCas_Plugin
             };
             _commentCollection.Add(data);
         }
+
+        private static bool HasNickname(IUser user)
+        {
+            return user != null && !string.IsNullOrEmpty(user.Nickname);
+        }
+
         public virtual void OnLoaded()
         {
             //throw new NotImplementedException();

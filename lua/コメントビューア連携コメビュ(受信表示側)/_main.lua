@@ -210,7 +210,7 @@ function chinng_gift_onMessage(sender, name, message)
                 if comm.date ~= nil then
                     local flag = false
                     for i=1, #lComment do
-                        if lComment[i].msg == comm.str then
+                        if lComment[i].str == comm.str then
                             flag = true
                         end
                     end
@@ -248,7 +248,7 @@ function chinng_gift_onMessage(sender, name, message)
                 if comm.date ~= nil then
                     local flag = false
                     for i=1, #lopeComment do
-                        if lopeComment[i].msg == comm.str then
+                        if lopeComment[i].str == comm.str then
                             flag = true
                         end
                     end

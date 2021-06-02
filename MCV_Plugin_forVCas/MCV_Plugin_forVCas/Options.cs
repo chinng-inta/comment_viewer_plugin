@@ -87,6 +87,17 @@ namespace MCV_Plugin_forVCas_Plugin
             }
         }
 
+        [DataMember]
+        private bool _isAbbreviation = false;
+        public virtual bool isAbbreviation
+        {
+            get { return _isAbbreviation; }
+            set {
+                _isAbbreviation = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public static Options Load()
         {
             Options options = new Options();

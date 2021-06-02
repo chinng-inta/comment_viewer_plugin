@@ -76,22 +76,23 @@ namespace MCV_Plugin_forVCas_Plugin
             //LINELIVE:linelive
             //Periscope:periscope
             //Mixer:mixer
-/*
-             string name;
-            if (messageMetadata.User != null && !string.IsNullOrEmpty(messageMetadata.User.Nickname))
-            {
-                name = messageMetadata.User.Nickname;
-            }
-            else
-            {
-                name = comment.NameItems.ToText();
-            }
-            
+            /*
+                         string name;
+                        if (messageMetadata.User != null && !string.IsNullOrEmpty(messageMetadata.User.Nickname))
+                        {
+                            name = messageMetadata.User.Nickname;
+                        }
+                        else
+                        {
+                            name = comment.NameItems.ToText();
+                        }
 
-            string _comment = comment.CommentItems.ToText();
-*/
-            var siteName = Tools.GetSiteName(message);
-            var (name, comment) = PluginCommon.Tools.GetData(message);
+
+                        string _comment = comment.CommentItems.ToText();
+            */
+            var siteName = Tools.GetSiteName(message, Options);
+            //var siteName = messageMetadata.SiteContextGuid;
+            var (name, comment) = Tools.GetData(message);
             if (HasNickname(messageMetadata.User))
             {
                 name = messageMetadata.User.Nickname;

@@ -16,6 +16,7 @@
         <Label x:Name="Comment3" Content="{Binding commentList2}" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
         <Label x:Name="Comment4" Content="{Binding commentList3}" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top"/>
         <Label x:Name="Comment5" Content="{Binding commentList4}" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="サイト名短縮表示" HorizontalAlignment="Left" Margin="175,211,0,0" VerticalAlignment="Top" IsChecked="{Binding _check}" Command="{Binding refRadioButtonOnPushCommand}"/>
 
     </Grid>
 </Window>

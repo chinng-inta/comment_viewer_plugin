@@ -50,6 +50,16 @@ namespace MCV_Plugin_forVCas_Plugin.ViewModel
             }
         }
 
+        public virtual bool _check
+        {
+            get { return _options.isAbbreviation; }
+            set
+            {
+                _options.isAbbreviation = value;
+            }
+        }
+        
+
         public string commentList0
         {
             get { return _options.commentList0; }
@@ -113,6 +123,12 @@ namespace MCV_Plugin_forVCas_Plugin.ViewModel
             }
         }
 
+        public ICommand refRadioButtonOnPushCommand { get; }
+        public void refRadioButtonOnPush()
+        {
+                _options.isAbbreviation = _check;
+        }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -129,6 +145,7 @@ namespace MCV_Plugin_forVCas_Plugin.ViewModel
             _options = Options.Load();
             startButtonOnPushCommand = new RelayCommand(startButtonOnPush);
             refButtonOnPushCommand = new RelayCommand(refButtonOnPush);
+            refRadioButtonOnPushCommand = new RelayCommand(refRadioButtonOnPush);
         }
         [GalaSoft.MvvmLight.Ioc.PreferredConstructor]
         public MainViewModel(Options options)
@@ -166,6 +183,7 @@ namespace MCV_Plugin_forVCas_Plugin.ViewModel
             };
             startButtonOnPushCommand = new RelayCommand(startButtonOnPush);
             refButtonOnPushCommand = new RelayCommand(refButtonOnPush);
+            refRadioButtonOnPushCommand = new RelayCommand(refRadioButtonOnPush);
         }
 
     }
